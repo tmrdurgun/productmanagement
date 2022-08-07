@@ -1,7 +1,9 @@
 
+
 function App() {
   return (
-    <div className="App">REACT APP STARTED!</div>
+    <div className="App">
+    </div>
   );
 }
 
