@@ -26,7 +26,8 @@ class ProductService {
 
     async addProduct(product) {
         try {
-            const result = await this.localStorageService.set('PRODUCTS', product);
+            const products = await this.getProducts();
+            const result = await this.localStorageService.set('PRODUCTS', [...products, product]);
 
             if (!result) throw new Error('Ürün eklenemedi!');
 
@@ -43,9 +44,10 @@ class ProductService {
         }
     }
 
-    async removeProduct(key) {
+    async removeProduct(id) {
         try {
-            const result = await this.localStorageService.delete(key);
+            const products = await this.getProducts();
+            const result = await this.localStorageService.set('PRODUCTS', products.filter(item => item.id === id));
 
             if (result) throw new Error('Ürün silinemedi!');
 

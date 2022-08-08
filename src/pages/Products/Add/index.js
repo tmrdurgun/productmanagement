@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ProductService from '../../../services/ProductService';
+import ProductForm from '../../../components/ProductForm';
 
 function AddProduct() {
     const productService = new ProductService();
@@ -27,7 +28,7 @@ function AddProduct() {
 
 
     return (
-        <div>Add New Products Page!</div>
+        <ProductForm />
     )
 }
 
