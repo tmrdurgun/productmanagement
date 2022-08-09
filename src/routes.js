@@ -1,43 +1,18 @@
-import {
-  ReactLocation,
-  Router,
-  Outlet
-} from '@tanstack/react-location';
+import { Routes, Route } from 'react-router-dom';
 import Products from './pages/Products';
 import AddProduct from './pages/Products/Add';
-const location = new ReactLocation();
 
 
-export const Routes = () => {
-
-  const RouteList = [
-    {
-      path: '/',
-      element: <Products />,
-    },
-    {
-      path: '/products',
-      children: [
-        {
-          path: '/',
-          element: <Products />,
-        },
-        {
-          path: '/add',
-          element: <AddProduct />,
-        }
-      ]
-    }
-  ];
+export const AppRoutes = () => {
 
   return (
-    <Router
-      location={location}
-      routes={RouteList.map((item) => item)}
-    >
-      <Outlet />
-    </Router>
+    <Routes >
+      <Route path="/" element={<Products />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/products/add" element={<AddProduct />} />
+    </Routes>
+
   );
 };
 
-export default Routes;
+export default AppRoutes;
