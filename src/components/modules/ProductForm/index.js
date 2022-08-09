@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 
-import { addProduct } from '../../store/actions';
-import { Store } from '../../store';
+import { addProduct } from '../../../store/actions';
+import { Store } from '../../../store';
 
 import styles from './style.module.scss';
 
-const ProductForm = () => {
+export const ProductForm = () => {
   const { dispatch } = useContext(Store);
   const [product, setProduct] = useState('');
 
@@ -26,5 +26,3 @@ const ProductForm = () => {
     </form>
   );
 };
-
-export default ProductForm;

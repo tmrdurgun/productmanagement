@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
-import { Store } from '../../store';
-import Product from '../Product';
+import { Store } from '../../../store';
+import { Product } from '../../../components';
 import styles from './style.module.scss';
 
 

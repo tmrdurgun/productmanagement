@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import ProductService from '../../../services/ProductService';
-import ProductForm from '../../../components/ProductForm';
+import { ProductForm } from '../../../components';
 
 function AddProduct() {
   const productService = new ProductService();

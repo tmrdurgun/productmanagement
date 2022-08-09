@@ -1,10 +1,4 @@
 import React from 'react';
 import styles from './style.module.scss';
 
-function Content({ children }) {
-  return (
-    <div className={styles.content}>{children}</div>
-  );
-}
-
-export default Content;
+export const Content = ({ children }) => <div className={styles.content}>{children}</div>;
