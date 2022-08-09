@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
-import { addProduct } from '../../actions';
-import { Store } from '../../store/Store';
+import { addProduct } from '../../store/actions';
+import { Store } from '../../store';
 
 import styles from './style.module.scss';
 

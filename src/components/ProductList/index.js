@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { Store } from '../../store/Store';
+import { Store } from '../../store';
 import Product from '../Product';
 import styles from "./style.module.scss";
 

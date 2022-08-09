@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 
-import { reducer } from "../reducers";
+import { reducer } from "./reducers";
 
 const initialState = {
     productList: [],

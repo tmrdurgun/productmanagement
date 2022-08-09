@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-import { FontAwesomeIcon } from 'react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 
-import { removeProduct } from '../../actions';
+import { removeProduct } from '../../store/actions';
 
 import styles from './style.module.scss';
 
