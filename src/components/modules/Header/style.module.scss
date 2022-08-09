@@ -1,3 +1,31 @@
+@import '../../../styles/variables.scss';
+
 .header{
     padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    nav{
+        ul{
+            display: flex;
+            li{
+                margin-left: 13.64px;
+                a{
+                    text-decoration: none;
+
+                    &:hover{
+                        color: $mainColor;
+                        font-weight: $fontSemiBold;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.logo{
+    font-size: 30px;
+    color: $mainColor;
+    font-weight: $fontBold;
 }
