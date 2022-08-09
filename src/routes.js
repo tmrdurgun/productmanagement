@@ -37,7 +37,7 @@ export const Routes = () => {
     >
       <Outlet />
     </Router>
-  )
-}
+  );
+};
 
 export default Routes;

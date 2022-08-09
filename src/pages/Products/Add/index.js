@@ -3,33 +3,33 @@ import ProductService from '../../../services/ProductService';
 import ProductForm from '../../../components/ProductForm';
 
 function AddProduct() {
-    const productService = new ProductService();
+  const productService = new ProductService();
 
-    async function handleAddProduct(product) {
-        const addProduct = await productService.addProduct(product);
+  async function handleAddProduct(product) {
+    const addProduct = await productService.addProduct(product);
 
-        console.log('addProduct: ', addProduct);
-    }
+    console.log('addProduct: ', addProduct);
+  }
 
-    async function handleRemoveProducts() {
-        const removeProducts = await productService.removeProducts();
+  async function handleRemoveProducts() {
+    const removeProducts = await productService.removeProducts();
 
-        console.log('removeProducts: ', removeProducts);
-    }
+    console.log('removeProducts: ', removeProducts);
+  }
 
-    useEffect(() => {
-        handleAddProduct({
-            id: "asd",
-            name: 'PRODUCT 1'
-        });
+  useEffect(() => {
+    handleAddProduct({
+      id: 'asd',
+      name: 'PRODUCT 1'
+    });
 
-        handleRemoveProducts();
-    }, [])
+    handleRemoveProducts();
+  }, []);
 
 
-    return (
-        <ProductForm />
-    )
+  return (
+    <ProductForm />
+  );
 }
 
 export default AddProduct;

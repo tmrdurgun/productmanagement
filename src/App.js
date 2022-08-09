@@ -1,5 +1,5 @@
-import DefaultLayout from "./components/layouts/Default";
-import Routes from "./routes";
+import DefaultLayout from './components/layouts/Default';
+import Routes from './routes';
 
 function App() {
   return (
