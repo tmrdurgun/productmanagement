@@ -24,7 +24,7 @@ class ProductService {
     }
   }
 
-  async addProduct(product) {
+  async saveProduct(product) {
     try {
       const products = await this.getProducts();
       const result = await this.localStorageService.set('PRODUCTS', [...products, product]);

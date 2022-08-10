@@ -1,4 +1,4 @@
-const addProduct = (state, product) => {
+const saveProduct = (state, product) => {
   const newProduct = {
     id: state.productList.length > 0 ? state.productList[state.productList.length - 1].id + 1 : 1,
     ...product,
@@ -17,7 +17,7 @@ const removeProduct = (state, productId) => {
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD_PRODUCT':
-      return addProduct(state, action.product);
+      return saveProduct(state, action.product);
     case 'REMOVE_PRODUCT':
       return removeProduct(state, action.productId);
     default:

@@ -1,4 +1,4 @@
-export const addProduct = (product, dispatch) => {
+export const saveProduct = (product, dispatch) => {
   dispatch({
     type: 'ADD_PRODUCT',
     product,

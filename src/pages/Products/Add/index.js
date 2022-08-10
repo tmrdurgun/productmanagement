@@ -6,9 +6,9 @@ function AddProduct() {
   const productService = new ProductService();
 
   async function handleAddProduct(product) {
-    const addProduct = await productService.addProduct(product);
+    const saveProduct = await productService.saveProduct(product);
 
-    console.log('addProduct: ', addProduct);
+    console.log('saveProduct: ', saveProduct);
   }
 
   async function handleRemoveProducts() {
