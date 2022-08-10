@@ -31,9 +31,26 @@
 }
 
 .collapseActions{
-    
-
     & > button{
         margin-left: 16px;
+        cursor: pointer;
+        border: 2px solid $textColor;
+        padding: 10px;
+        border-radius: 50%;
+
+        &:hover{
+            border: 2px solid $mainColor;
+            color: $mainColor;
+        }
     }
+}
+
+.collapseBody{
+    background-color: #fff;
+    border: 2px solid #f6f6f6;
+    padding: 24px 16px;
+}
+
+.collapsed{
+    display: none;
 }

@@ -15,14 +15,14 @@ export const Product = memo(
   (props) => {
     const { product } = props;
 
-    const [collapsed, setCollapsed] = useState(true);
+    const [isCollapsed, setIsCollapsed] = useState(true);
 
     const handleRemoveProduct = () => {
       removeProduct(product.id, dispatch);
     };
 
     const handleCollapse = () => {
-      setCollapsed(!collapsed);
+      setIsCollapsed(!isCollapsed);
     };
 
     return (
@@ -50,9 +50,7 @@ export const Product = memo(
               </div>
             </div>
           </div>
-          <div className={styles.collapseBody}>
-
-          </div>
+          <div className={`${styles.collapseBody} ${isCollapsed ? styles.collapsed : ''}`}>{product.desc}</div>
         </div>
 
 
