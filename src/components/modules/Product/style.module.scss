@@ -10,6 +10,7 @@
 
 .collapse{
     background-color: #f6f6f6;
+    border-radius: 4px 4px 0px 0px;
 }
 
 .collapseHeader{
@@ -34,13 +35,17 @@
     & > button{
         margin-left: 16px;
         cursor: pointer;
-        border: 2px solid $textColor;
+        background: $mainColor;
+        color: #fff;
         padding: 10px;
         border-radius: 50%;
+        border: none;
 
         &:hover{
-            border: 2px solid $mainColor;
-            color: $mainColor;
+            background: none;
+            padding: 9px;
+            border: 1px solid $textColor;
+            color: $textColor;
         }
     }
 }
@@ -49,6 +54,7 @@
     background-color: #fff;
     border: 2px solid #f6f6f6;
     padding: 24px 16px;
+    border-radius: 0px 0px 4px 4px;
 }
 
 .collapsed{

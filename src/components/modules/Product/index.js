@@ -2,7 +2,8 @@ import React, { memo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTrash,
-  faChevronCircleDown
+  faChevronUp,
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
 
 import { removeProduct } from '../../../store/actions';
@@ -39,18 +40,21 @@ export const Product = memo(
             </div>
 
             <div className={styles.collapseActionsContainer}>
-              <div>
-                <p>Product Type</p>
+              <div className="text-right">
+                <p className="text-bold">Product Type</p>
                 <p>{ProductTypesLabel[product.type]}</p>
               </div>
 
               <div className={styles.collapseActions}>
                 <button onClick={handleRemoveProduct}><FontAwesomeIcon icon={faTrash} size="lg" /></button>
-                <button onClick={handleCollapse}><FontAwesomeIcon icon={faChevronCircleDown} size="lg" /></button>
+                <button onClick={handleCollapse}><FontAwesomeIcon icon={isCollapsed ? faChevronDown : faChevronUp} size="lg" /></button>
               </div>
             </div>
           </div>
-          <div className={`${styles.collapseBody} ${isCollapsed ? styles.collapsed : ''}`}>{product.desc}</div>
+          <div className={`${styles.collapseBody} ${isCollapsed ? styles.collapsed : ''}`}>
+            <p className="text-bold">Description:</p>
+            <p>{product.desc}</p>
+          </div>
         </div>
 
 
