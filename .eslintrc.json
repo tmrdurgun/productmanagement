@@ -24,6 +24,8 @@
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
         "spaced-comment": "error",
+        "no-undef": 0,
+        "react/display-name": 0,
         "quotes": [
             "error",
             "single"

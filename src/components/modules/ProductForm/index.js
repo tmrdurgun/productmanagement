@@ -7,21 +7,29 @@ import styles from './style.module.scss';
 
 export const ProductForm = () => {
   const { dispatch } = useContext(Store);
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState({
+    name: '',
+    barcode: '',
+    desc: ''
+  });
 
-  const handleProductInput = (event) => {
-    setProduct(event.target.value);
+  const handleInputChange = (field) => (event) => {
+    setProduct({ ...product, [field]: event.target.value });
   };
 
   const handleProductSubmit = (event) => {
     event.preventDefault();
-    product.trim().length > 0 && addProduct(product, dispatch);
-    setProduct('');
+    addProduct(product, dispatch);
+    setProduct({
+      name: '',
+      barcode: '',
+      desc: ''
+    });
   };
 
   return (
     <form onSubmit={handleProductSubmit} className={styles.productForm}>
-      <input type="text" value={product} onChange={handleProductInput} />
+      <input type="text" value={product.name} onChange={handleInputChange('name')} />
       <button type="submit">Add Product</button>
     </form>
   );

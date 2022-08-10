@@ -11,9 +11,7 @@ export const ProductList = () => {
   const productList = state.productList.map((product) => (
     <Product
       key={product.id}
-      productId={product.id}
-      productText={product.text}
-      productTag={product.tag}
+      product={product}
       dispatch={dispatch}
     />
   ));

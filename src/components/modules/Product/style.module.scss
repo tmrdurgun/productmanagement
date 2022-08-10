@@ -1,2 +1,39 @@
+@import '../../../styles/variables.scss';
+
 .product {
+    width: 100%;
+}
+
+.productName {
+    margin-right: 58px;
+}
+
+.collapse{
+    background-color: #f6f6f6;
+}
+
+.collapseHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+    padding: 0 16px;
+}
+
+.collapseTitleContainer{
+    display: flex;
+    align-items: center;
+}
+
+.collapseActionsContainer{
+    display: flex;
+    align-items: center;
+}
+
+.collapseActions{
+    
+
+    & > button{
+        margin-left: 16px;
+    }
 }
