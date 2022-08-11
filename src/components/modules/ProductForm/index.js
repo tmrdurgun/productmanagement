@@ -14,65 +14,81 @@ import {
 export const ProductForm = () => {
   const { dispatch } = useContext(Store);
 
-  const [productType, setProductType] = useState(ProductTypes.standart);
-
-  const [newProduct, setNewProduct] = useState([{
+  const [newProduct, setNewProduct] = useState({
     name: '',
     barcode: '',
+    licence: '',
     desc: '',
-    type: productType
-  }]);
+    type: ProductTypes.standart,
+  });
 
   const [products, setProducts] = useState([]);
 
-
   const handleAddProduct = () => {
     setProducts([...products, newProduct]);
+  };
+
+  const handleChangeProductDetails = (index, field, val) => {
+    setProducts(products.map((item, i) => {
+      if (i === index) item[field] = val;
+      return item;
+    }));
   };
 
   const handleRemoveProduct = (barcode) => {
     setProducts(products.filter(item => item.barcode !== barcode));
   };
 
-  const handleInputChange = (field) => (event) => {
-    setNewProduct({ ...newProduct, [field]: event.target.value });
+  const handleInputChange = (field, val) => {
+    setNewProduct({ ...newProduct, [field]: val });
+  };
+
+  const resetForm = () => {
+    setProduct({
+      name: '',
+      barcode: '',
+      licence: '',
+      desc: '',
+      type: productType
+    });
+
+    setProducts([]);
   };
 
   const handleSaveProduct = (event) => {
     event.preventDefault();
     saveProduct(products, dispatch);
-    setProduct({
-      name: '',
-      barcode: '',
-      desc: ''
-    });
+    resetForm();
   };
+
+  console.log('Products: ', products);
 
   return (
     <>
       <div className={styles.formSection}>
         <h6 className="text-bold">Product Type</h6>
         <div>
-          <button className="primary" onClick={() => setProductType(ProductTypes.onlineLicence)}>Online Licence</button>
-          <button className="primary" onClick={() => setProductType(ProductTypes.standart)}>Standart</button>
+          <button className="primary" onClick={() => handleInputChange('type', ProductTypes.onlineLicence)}>Online Licence</button>
+          <button className="primary" onClick={() => handleInputChange('type', ProductTypes.standart)}>Standart</button>
         </div>
       </div>
 
       <form className={styles.productForm}>
         <div className={styles.inputGroup}>
           <label>Name</label>
-          <input type="text" value={newProduct.name} onChange={handleInputChange('name')} />
+          <input type="text" value={newProduct.name} onChange={(e) => handleInputChange('name', e.target.value)} />
         </div>
 
         <div className={styles.inputGroup}>
           <label>Barcode</label>
-          <input type="text" value={newProduct.barcode} onChange={handleInputChange('barcode')} />
+          <input type="text" value={newProduct.barcode} onChange={(e) => handleInputChange('barcode', e.target.value)} />
         </div>
 
         <button className="primary" type="button" onClick={handleAddProduct}>Add</button>
       </form>
 
       <div className={styles.formSection}>
+        <h6 className="text-bold">Products</h6>
         <ul className="newProductsPreview">
           {
             products.map((productItem, i) => (
@@ -86,7 +102,25 @@ export const ProductForm = () => {
       </div>
 
       <form onSubmit={handleSaveProduct} className={styles.productForm}>
-
+        <h6 className="text-bold mb-15">Product Details</h6>
+        <ul>
+          {
+            products.map((productItemDetail, i) => (
+              <li key={`productItemDetail-${i + 1}`} className="mb-30">
+                <p>Name: {productItemDetail.name}</p>
+                <p>Barcode: {productItemDetail.barcode}</p>
+                {productItemDetail.type === ProductTypes.onlineLicence && <div className={styles.inputGroup}>
+                  <label>Licence Code:</label>
+                  <input type="text" value={productItemDetail.licenceCode} onChange={(e) => handleChangeProductDetails(i, 'licenceCode', e.target.value)} />
+                </div>}
+                <div className={styles.inputGroup}>
+                  <label>Description {productItemDetail.type === ProductTypes.onlineLicence ? '(optional)' : '(required)'}:</label>
+                  <textarea value={productItemDetail.desc} onChange={(e) => handleChangeProductDetails(i, 'desc', e.target.value)}></textarea>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
         <button className="primary" type="submit" onClick={handleAddProduct}>Submit</button>
       </form>
     </>

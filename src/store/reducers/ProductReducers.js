@@ -1,6 +1,8 @@
+import { generateId } from '../../utils';
+
 const saveProduct = (state, product) => {
   const newProduct = {
-    id: state.productList.length > 0 ? state.productList[state.productList.length - 1].id + 1 : 1,
+    id: generateId(),
     ...product,
     createdAt: new Date()
   };

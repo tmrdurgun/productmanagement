@@ -26,6 +26,7 @@
         "spaced-comment": "error",
         "no-undef": 0,
         "react/display-name": 0,
+        "no-unused-vars": 0,
         "quotes": [
             "error",
             "single"

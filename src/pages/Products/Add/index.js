@@ -8,13 +8,13 @@ function AddProduct() {
   async function handleAddProduct(product) {
     const saveProduct = await productService.saveProduct(product);
 
-    console.log('saveProduct: ', saveProduct);
+    // console.log('saveProduct: ', saveProduct);
   }
 
   async function handleRemoveProducts() {
     const removeProducts = await productService.removeProducts();
 
-    console.log('removeProducts: ', removeProducts);
+    // console.log('removeProducts: ', removeProducts);
   }
 
   useEffect(() => {
