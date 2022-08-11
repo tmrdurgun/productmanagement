@@ -1,4 +1,5 @@
 import LocalStorageService from './LocalStorageService';
+import { generateId } from '../utils';
 
 class ProductService {
   constructor() {
@@ -24,16 +25,23 @@ class ProductService {
     }
   }
 
-  async saveProduct(product) {
+  async saveProducts(products) {
     try {
-      const products = await this.getProducts();
-      const result = await this.localStorageService.set('PRODUCTS', [...products, product]);
+      const productList = products.map(item => {
+        item.id = generateId();
+        item.createdAt = new Date();
+        return item;
+      });
 
-      if (!result) throw new Error('Ürün eklenemedi!');
+      const prevProducts = await this.getProducts('PRODUCTS');
+      console.log(prevProducts);
+      const result = await this.localStorageService.set('PRODUCTS', prevProducts.success ? prevProducts.data.concat(productList) : productList);
+
+      if (!result) throw new Error('Saving products have failed!');
 
       return {
         success: true,
-        message: 'Ürün eklendi!'
+        message: 'New products added!'
       };
 
     } catch (error) {

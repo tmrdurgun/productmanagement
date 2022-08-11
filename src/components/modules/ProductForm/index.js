@@ -1,18 +1,22 @@
 import React, { useState, useContext } from 'react';
 
-import { saveProduct } from '../../../store/actions';
+import ProductService from '../../../services/ProductService';
+
 import { Store } from '../../../store';
 
-import styles from './style.module.scss';
 import { ProductTypes } from '../../../common/enums/ProductEnum';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTrash
-} from '@fortawesome/free-solid-svg-icons';
+
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+import styles from './style.module.scss';
+
+import { saveProducts } from '../../../store/actions';
 
 export const ProductForm = () => {
   const { dispatch } = useContext(Store);
+  const productService = new ProductService();
 
   const [newProduct, setNewProduct] = useState({
     name: '',
@@ -44,24 +48,29 @@ export const ProductForm = () => {
   };
 
   const resetForm = () => {
-    setProduct({
+    setNewProduct({
       name: '',
       barcode: '',
       licence: '',
       desc: '',
-      type: productType
+      type: ProductTypes.standart
     });
 
     setProducts([]);
   };
 
-  const handleSaveProduct = (event) => {
+  const handleSaveProduct = async (event) => {
     event.preventDefault();
-    saveProduct(products, dispatch);
-    resetForm();
-  };
 
-  console.log('Products: ', products);
+    const saveProductsResponse = await productService.saveProducts(products);
+
+    if (saveProductsResponse.success) {
+      const savedProducts = await productService.getProducts();
+      saveProducts(savedProducts.data, dispatch);
+      resetForm();
+    }
+
+  };
 
   return (
     <>
@@ -101,7 +110,7 @@ export const ProductForm = () => {
         </ul>
       </div>
 
-      <form onSubmit={handleSaveProduct} className={styles.productForm}>
+      <form onSubmit={(e) => handleSaveProduct(e)} className={styles.productForm}>
         <h6 className="text-bold mb-15">Product Details</h6>
         <ul>
           {
@@ -121,7 +130,7 @@ export const ProductForm = () => {
             ))
           }
         </ul>
-        <button className="primary" type="submit" onClick={handleAddProduct}>Submit</button>
+        <button className="primary" type="submit">Submit</button>
       </form>
     </>
   );

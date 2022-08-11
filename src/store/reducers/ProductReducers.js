@@ -1,13 +1,8 @@
-import { generateId } from '../../utils';
-
-const saveProduct = (state, product) => {
-  const newProduct = {
-    id: generateId(),
-    ...product,
-    createdAt: new Date()
+const saveProducts = (state, products) => {
+  return {
+    ...state,
+    productList: products
   };
-
-  return { ...state, productList: [...state.productList, newProduct] };
 };
 
 const removeProduct = (state, productId) => {
@@ -18,8 +13,8 @@ const removeProduct = (state, productId) => {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_PRODUCT':
-      return saveProduct(state, action.product);
+    case 'SAVE_PRODUCTS':
+      return saveProducts(state, action.products);
     case 'REMOVE_PRODUCT':
       return removeProduct(state, action.productId);
     default:

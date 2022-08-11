@@ -12,6 +12,8 @@ import styles from './style.module.scss';
 
 import { ProductTypesLabel } from '../../../common/enums/ProductEnum';
 
+import { dateToStr } from '../../../utils';
+
 export const Product = memo(
   (props) => {
     const { product } = props;
@@ -35,7 +37,7 @@ export const Product = memo(
               <div className={styles.productName}>{product.name}</div>
               <div>
                 <p>Number: {product.barcode}</p>
-                <p>Created Date: {product.createdAt}</p>
+                <p>Created Date: {dateToStr(product.createdAt)}</p>
               </div>
             </div>
 

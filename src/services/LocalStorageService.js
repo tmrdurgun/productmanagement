@@ -4,7 +4,7 @@ class LocalStorageService {
   }
 
   async set(key, data) {
-    localStorage.setItem(key, data);
+    localStorage.setItem(key, JSON.stringify(data));
     const result = await this.get(key);
     return result;
   }

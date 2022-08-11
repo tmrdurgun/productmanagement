@@ -1,7 +1,7 @@
-export const saveProduct = (product, dispatch) => {
+export const saveProducts = (products, dispatch) => {
   dispatch({
-    type: 'ADD_PRODUCT',
-    product,
+    type: 'SAVE_PRODUCTS',
+    products,
   });
 };
 
