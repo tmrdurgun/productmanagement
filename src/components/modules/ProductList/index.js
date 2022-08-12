@@ -32,10 +32,19 @@ export const ProductList = () => {
     />
   ));
 
-  return (
-    <>
-      {products && <div className={styles.productList}>{productList}</div>}
-      {!products && <h3 className="text-center text-bold">No Products To Display <FontAwesomeIcon icon={faFrown} size="lg" /></h3>}
-    </>
-  );
+  /* 
+    The factory pattern allows to factor out the process of object creation. This can have multiple purpose:
+
+    - the final object depends on the parameters.
+    - separate a simple object representation from the logic of creating it.
+  */
+  const renderFactory = () => {
+    if (products) {
+      return <div className={styles.productList}>{productList}</div>;
+    }
+
+    return <h3 className="text-center text-bold">No Products To Display <FontAwesomeIcon icon={faFrown} size="lg" /></h3>;
+  };
+
+  return (<>{renderFactory()}</>);
 };
