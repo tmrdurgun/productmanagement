@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { Product } from '../../../components';
 
@@ -8,22 +8,22 @@ import { faFrown } from '@fortawesome/free-solid-svg-icons';
 import styles from './style.module.scss';
 
 import ProductService from '../../../services/ProductService';
+import { Store } from '../../../store';
+
+const productService = new ProductService();
 
 export const ProductList = () => {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
+  const { state } = useContext(Store);
 
   const getProducts = async () => {
-    const productService = new ProductService();
-
     const productsResponse = await productService.getProducts();
     setProducts(productsResponse.data);
   };
 
   useEffect(() => {
     getProducts();
-  }, []);
-
-  console.log('products: ', products);
+  }, [state.productList]);
 
   const productList = products?.map((product) => (
     <Product
@@ -34,8 +34,8 @@ export const ProductList = () => {
 
   return (
     <>
-      {productList && <div className={styles.productList}>{productList}</div>}
-      {!productList && <h3 className="text-center text-bold">No Products To Display <FontAwesomeIcon icon={faFrown} size="lg" /></h3>}
+      {products && <div className={styles.productList}>{productList}</div>}
+      {!products && <h3 className="text-center text-bold">No Products To Display <FontAwesomeIcon icon={faFrown} size="lg" /></h3>}
     </>
   );
 };

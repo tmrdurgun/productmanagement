@@ -6,9 +6,7 @@ const saveProducts = (state, products) => {
 };
 
 const removeProduct = (state, productId) => {
-  const newproductList = state.productList.filter(product => product.id !== productId);
-
-  return { ...state, productList: newproductList };
+  return { ...state, productList: state.productList.filter(product => product.id !== productId) };
 };
 
 export const reducer = (state, action) => {
@@ -16,6 +14,7 @@ export const reducer = (state, action) => {
     case 'SAVE_PRODUCTS':
       return saveProducts(state, action.products);
     case 'REMOVE_PRODUCT':
+      console.log('REMOVE_PRODUCT');
       return removeProduct(state, action.productId);
     default:
       return state;

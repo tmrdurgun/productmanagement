@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTrash,
@@ -14,14 +14,27 @@ import { ProductTypesLabel } from '../../../common/enums/ProductEnum';
 
 import { dateToStr } from '../../../utils';
 
+import { Store } from '../../../store';
+
+import ProductService from '../../../services/ProductService';
+
+const productService = new ProductService();
+
 export const Product = memo(
   (props) => {
     const { product } = props;
 
     const [isCollapsed, setIsCollapsed] = useState(true);
+    const { dispatch } = useContext(Store);
 
-    const handleRemoveProduct = () => {
-      removeProduct(product.id, dispatch);
+    const handleRemoveProduct = async () => {
+      const removeProductResponse = await productService.removeProduct(product.id);
+
+      console.log('removeProductResponse: ', removeProductResponse);
+
+      if (removeProductResponse.success) {
+        removeProduct(product.id, dispatch);
+      }
     };
 
     const handleCollapse = () => {

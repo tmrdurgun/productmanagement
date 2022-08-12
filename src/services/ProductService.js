@@ -34,7 +34,6 @@ class ProductService {
       });
 
       const prevProducts = await this.getProducts('PRODUCTS');
-      console.log(prevProducts);
       const result = await this.localStorageService.set('PRODUCTS', prevProducts.success ? prevProducts.data.concat(productList) : productList);
 
       if (!result) throw new Error('Saving products have failed!');
@@ -55,7 +54,11 @@ class ProductService {
   async removeProduct(id) {
     try {
       const products = await this.getProducts();
-      const result = await this.localStorageService.set('PRODUCTS', products.filter(item => item.id === id));
+
+      await this.localStorageService.set('PRODUCTS', products.data.filter(item => item.id !== id));
+
+      const productsAfterRemove = await this.getProducts();
+      const result = productsAfterRemove.data.find(item => item.id === id);
 
       if (result) throw new Error('Ürün silinemedi!');
 

@@ -14,9 +14,10 @@ import styles from './style.module.scss';
 
 import { saveProducts } from '../../../store/actions';
 
+const productService = new ProductService();
+
 export const ProductForm = () => {
   const { dispatch } = useContext(Store);
-  const productService = new ProductService();
 
   const [newProduct, setNewProduct] = useState({
     name: '',
