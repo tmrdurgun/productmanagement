@@ -29,7 +29,8 @@ export const ProductForm = () => {
 
   const [products, setProducts] = useState([]);
 
-  const handleAddProduct = () => {
+  const handleAddProduct = (event) => {
+    event.preventDefault();
     setProducts([...products, newProduct]);
   };
 
@@ -40,8 +41,8 @@ export const ProductForm = () => {
     }));
   };
 
-  const handleRemoveProduct = (barcode) => {
-    setProducts(products.filter(item => item.barcode !== barcode));
+  const handleRemoveProduct = (index) => {
+    setProducts(products.filter((item, i) => i !== index));
   };
 
   const handleInputChange = (field, val) => {
@@ -76,14 +77,15 @@ export const ProductForm = () => {
   return (
     <>
       <div className={styles.formSection}>
-        <h6 className="text-bold">Product Type</h6>
+        <h6 className="text-bold mb-15">Product Type</h6>
         <div>
-          <button className="primary" onClick={() => handleInputChange('type', ProductTypes.onlineLicence)}>Online Licence</button>
-          <button className="primary" onClick={() => handleInputChange('type', ProductTypes.standart)}>Standart</button>
+          <button className={`${styles.buttonPrimary} ${newProduct.type === ProductTypes.onlineLicence && styles.buttonPrimaryActive} mr-15`} onClick={() => handleInputChange('type', ProductTypes.onlineLicence)}>Online Licence</button>
+          <button className={`${styles.buttonPrimary} ${newProduct.type === ProductTypes.standart && styles.buttonPrimaryActive}`} onClick={() => handleInputChange('type', ProductTypes.standart)}>Standart</button>
         </div>
       </div>
 
-      <form className={styles.productForm}>
+      <form onSubmit={(e) => handleAddProduct(e)} className={`${styles.productForm} ${styles.formSection}`}>
+        <h6 className="text-bold mb-15">Add Product</h6>
         <div className={styles.inputGroup}>
           <label>Name</label>
           <input type="text" value={newProduct.name} onChange={(e) => handleInputChange('name', e.target.value)} />
@@ -94,17 +96,17 @@ export const ProductForm = () => {
           <input type="text" value={newProduct.barcode} onChange={(e) => handleInputChange('barcode', e.target.value)} />
         </div>
 
-        <button className="primary" type="button" onClick={handleAddProduct}>Add</button>
+        <button className={styles.buttonPrimary} type="submit">Add</button>
       </form>
 
       <div className={styles.formSection}>
-        <h6 className="text-bold">Products</h6>
-        <ul className="newProductsPreview">
+        <h6 className="text-bold mb-15">Products</h6>
+        <ul className={styles.newProductsPreview}>
           {
             products.map((productItem, i) => (
-              <li key={`productItem-${i + 1}`}>
+              <li key={`productItem-${i + 1}`} className="mb-15">
                 <span>{`${productItem.name} - ${productItem.barcode}`}</span>
-                <button onClick={() => handleRemoveProduct(productItem.barcode)}><FontAwesomeIcon icon={faTrash} size="lg" /></button>
+                <button onClick={() => handleRemoveProduct(i)}><FontAwesomeIcon icon={faTrash} size="sm" /></button>
               </li>
             ))
           }
@@ -131,7 +133,7 @@ export const ProductForm = () => {
             ))
           }
         </ul>
-        <button className="primary" type="submit">Submit</button>
+        <button className={styles.buttonPrimary} type="submit">Submit</button>
       </form>
     </>
   );

@@ -10,18 +10,8 @@
     outline: none;
   }
 
-  button {
-    flex: 1;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    color: #fff;
-    background: #307BFF;
-    border-color: #307BFF;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
   input[type="text"]{width: 180px}
+
   textarea{
     border: 1px solid #9E9E9E;
     border-radius: 4px;
@@ -52,4 +42,54 @@
     margin-bottom: 20px;
     font-size: 16px;
   }
+}
+
+.buttonPrimary{
+  border: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	cursor: pointer;
+	min-width: 142px;
+  background: $mainColorHover;
+  color: $textColor;
+  font-weight: $fontSemiBold;
+
+  &:hover{
+    background: $mainColor;
+    color: #fff;
+  }
+}
+
+.buttonPrimaryActive{
+  background: $mainColor;
+  color: #fff;
+}
+
+.newProductsPreview{
+  li{
+    width: 291px;
+    background: #FFFFFF;
+    border: 1px solid #9E9E9E;
+    border-radius: 4px;
+    padding: 6px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button{
+    cursor: pointer;
+    background: $mainColor;
+    color: #fff;
+    padding: 6px;
+    border-radius: 50%;
+    border: none;
+
+    &:hover{
+        background: none;
+        padding: 5px;
+        border: 1px solid $textColor;
+        color: $textColor;
+    }
+}
 }
