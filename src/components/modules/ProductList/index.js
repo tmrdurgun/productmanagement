@@ -40,7 +40,7 @@ export const ProductList = () => {
     - separate a simple object representation from the logic of creating it.
   */
   const renderFactory = () => {
-    if (products) {
+    if (products.length > 0) {
       return <div className={styles.productList}>{productList}</div>;
     }
 
