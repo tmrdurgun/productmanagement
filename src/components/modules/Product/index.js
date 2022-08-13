@@ -21,9 +21,9 @@ import ProductService from '../../../services/ProductService';
 const productService = new ProductService();
 
 const Product = (props) => {
-  const { product } = props;
+  const { product, collapsed } = props;
 
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(collapsed);
   const { dispatch } = useContext(Store);
 
   const handleRemoveProduct = async () => {

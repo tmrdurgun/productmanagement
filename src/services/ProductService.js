@@ -75,24 +75,6 @@ class ProductService {
     }
   }
 
-  async removeProducts() {
-    try {
-      const result = await this.localStorageService.delete('PRODUCTS');
-
-      if (result) throw new Error('Ürünler silinemedi!');
-
-      return {
-        success: true,
-        message: 'Ürünler silindi!'
-      };
-
-    } catch (error) {
-      return {
-        success: false,
-        message: error.message
-      };
-    }
-  }
 }
 
 export default ProductService;

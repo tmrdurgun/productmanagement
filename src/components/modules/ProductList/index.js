@@ -29,6 +29,7 @@ export const ProductList = () => {
     <Product
       key={product.id}
       product={product}
+      collapsed
     />
   ));
 
