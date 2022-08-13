@@ -64,6 +64,12 @@ const Product = (props) => {
           </div>
         </div>
         <div className={`${styles.collapseBody} ${isCollapsed ? styles.collapsed : ''}`}>
+          {product.licenceCode &&
+            <div className='mb-15'>
+              <p className="text-bold">Licence Code:</p>
+              <p>{product.licenceCode}</p>
+            </div>}
+
           <p className="text-bold">Description:</p>
           <p>{product.desc}</p>
         </div>

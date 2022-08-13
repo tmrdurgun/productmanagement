@@ -26,45 +26,6 @@
   margin-bottom: 68px;
 }
 
-.inputGroup{
-  display: flex;
-  flex-direction: column;
-  
-  label{
-    margin-bottom: 4px;
-  }
-
-  input{
-    background: #FFFFFF;
-    border: 1px solid #9E9E9E;
-    border-radius: 4px;
-    padding: 7px;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-}
-
-.buttonPrimary{
-  border: none;
-	border-radius: 4px;
-	padding: 8px 16px;
-	cursor: pointer;
-	min-width: 142px;
-  background: $mainColorHover;
-  color: $textColor;
-  font-weight: $fontSemiBold;
-
-  &:hover{
-    background: $mainColor;
-    color: #fff;
-  }
-}
-
-.buttonPrimaryActive{
-  background: $mainColor;
-  color: #fff;
-}
-
 .newProductsPreview{
   li{
     width: 291px;
@@ -77,19 +38,23 @@
     align-items: center;
   }
 
-  button{
+  a{
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     background: $mainColor;
     color: #fff;
-    padding: 6px;
     border-radius: 50%;
     border: none;
 
     &:hover{
         background: none;
-        padding: 5px;
         border: 1px solid $textColor;
         color: $textColor;
     }
-}
+  }
 }

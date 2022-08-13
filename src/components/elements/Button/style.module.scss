@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+
+.buttonPrimary{
+    border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+      min-width: 142px;
+    background: $mainColorHover;
+    color: $textColor;
+    font-weight: $fontSemiBold;
+  
+    &:hover{
+      background: $mainColor;
+      color: #fff;
+    }
+  }
+  
+  .buttonPrimaryActive{
+    background: $mainColor;
+    color: #fff;
+  }

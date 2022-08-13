@@ -2,13 +2,13 @@ import React from 'react';
 
 import styles from './style.module.scss';
 
-export const Input = ({
+export const TextArea = ({
   label,
   value,
   onChange
 }) => (
-  <div className={styles.input}>
+  <div className={styles.textArea}>
     {label && <label>{label}</label>}
-    <input type="text" value={value} onChange={onChange} />
+    <textarea type="text" value={value} onChange={onChange}></textarea>
   </div>
 );

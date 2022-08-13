@@ -14,6 +14,8 @@ import styles from './style.module.scss';
 
 import { saveProducts } from '../../../store/actions';
 
+import { Input, TextArea, Button } from '../../../components';
+
 const productService = new ProductService();
 
 export const ProductForm = () => {
@@ -22,7 +24,7 @@ export const ProductForm = () => {
   const [newProduct, setNewProduct] = useState({
     name: '',
     barcode: '',
-    licence: '',
+    licenceCode: '',
     desc: '',
     type: ProductTypes.standart,
   });
@@ -79,41 +81,46 @@ export const ProductForm = () => {
       <div className={styles.formSection}>
         <h6 className="text-bold mb-15">Product Type</h6>
         <div>
-          <button className={`${styles.buttonPrimary} ${newProduct.type === ProductTypes.onlineLicence && styles.buttonPrimaryActive} mr-15`} onClick={() => handleInputChange('type', ProductTypes.onlineLicence)}>Online Licence</button>
-          <button className={`${styles.buttonPrimary} ${newProduct.type === ProductTypes.standart && styles.buttonPrimaryActive}`} onClick={() => handleInputChange('type', ProductTypes.standart)}>Standart</button>
+          <Button
+            label="Online Licence"
+            className="mr-15"
+            isActive={newProduct.type === ProductTypes.onlineLicence}
+            onClick={() => handleInputChange('type', ProductTypes.onlineLicence)}
+          />
+
+          <Button
+            label="Standart"
+            isActive={newProduct.type === ProductTypes.standart}
+            onClick={() => handleInputChange('type', ProductTypes.standart)}
+          />
         </div>
       </div>
 
       <form onSubmit={(e) => handleAddProduct(e)} className={`${styles.productForm} ${styles.formSection}`}>
         <h6 className="text-bold mb-15">Add Product</h6>
-        <div className={styles.inputGroup}>
-          <label>Name</label>
-          <input type="text" value={newProduct.name} onChange={(e) => handleInputChange('name', e.target.value)} />
-        </div>
 
-        <div className={styles.inputGroup}>
-          <label>Barcode</label>
-          <input type="text" value={newProduct.barcode} onChange={(e) => handleInputChange('barcode', e.target.value)} />
-        </div>
+        <Input label="Name" className="anan" value={newProduct.name} onChange={(e) => handleInputChange('name', e.target.value)} />
 
-        <button className={styles.buttonPrimary} type="submit">Add</button>
+        <Input label="Barcode" value={newProduct.barcode} onChange={(e) => handleInputChange('barcode', e.target.value)} />
+
+        <Button type="submit" label="Add" />
       </form>
 
-      <div className={styles.formSection}>
+      {products.length > 0 && <div className={styles.formSection}>
         <h6 className="text-bold mb-15">Products</h6>
         <ul className={styles.newProductsPreview}>
           {
             products.map((productItem, i) => (
               <li key={`productItem-${i + 1}`} className="mb-15">
                 <span>{`${productItem.name} - ${productItem.barcode}`}</span>
-                <button onClick={() => handleRemoveProduct(i)}><FontAwesomeIcon icon={faTrash} size="sm" /></button>
+                <a href="javascript:void(0)" onClick={() => handleRemoveProduct(i)}><FontAwesomeIcon icon={faTrash} size="sm" /></a>
               </li>
             ))
           }
         </ul>
-      </div>
+      </div>}
 
-      <form onSubmit={(e) => handleSaveProduct(e)} className={styles.productForm}>
+      {products.length > 0 && <form onSubmit={(e) => handleSaveProduct(e)} className={styles.productForm}>
         <h6 className="text-bold mb-15">Product Details</h6>
         <ul>
           {
@@ -121,20 +128,20 @@ export const ProductForm = () => {
               <li key={`productItemDetail-${i + 1}`} className="mb-30">
                 <p>Name: {productItemDetail.name}</p>
                 <p>Barcode: {productItemDetail.barcode}</p>
-                {productItemDetail.type === ProductTypes.onlineLicence && <div className={styles.inputGroup}>
-                  <label>Licence Code:</label>
-                  <input type="text" value={productItemDetail.licenceCode} onChange={(e) => handleChangeProductDetails(i, 'licenceCode', e.target.value)} />
-                </div>}
-                <div className={styles.inputGroup}>
-                  <label>Description {productItemDetail.type === ProductTypes.onlineLicence ? '(optional)' : '(required)'}:</label>
-                  <textarea value={productItemDetail.desc} onChange={(e) => handleChangeProductDetails(i, 'desc', e.target.value)}></textarea>
-                </div>
+                {productItemDetail.type === ProductTypes.onlineLicence &&
+                  <Input label="Licence Code:" value={productItemDetail.licenceCode} onChange={(e) => handleChangeProductDetails(i, 'licenceCode', e.target.value)} />}
+
+                <TextArea label={`Description ${productItemDetail.type === ProductTypes.onlineLicence ? '(optional)' : '(required)'}`} value={productItemDetail.desc} onChange={(e) => handleChangeProductDetails(i, 'desc', e.target.value)} />
+
               </li>
             ))
           }
         </ul>
-        <button className={styles.buttonPrimary} type="submit">Submit</button>
-      </form>
+
+        <Button type="submit" label="Submit" />
+
+      </form>}
     </>
   );
+
 };
