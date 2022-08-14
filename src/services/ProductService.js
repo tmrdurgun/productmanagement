@@ -75,6 +75,26 @@ class ProductService {
     }
   }
 
+  async getProductsPerPage(size, page) {
+    try {
+      const products = await this.getProducts();
+
+      if (!products.success) throw new Error(products.message);
+
+      const pageStart = (size * page) - size;
+      const pageEnd = size * page;
+
+      return products.data.slice(pageStart, pageEnd);
+
+    } catch (error) {
+      return {
+        success: false,
+        message: error.message
+      };
+    }
+
+  }
+
 }
 
 export default ProductService;
