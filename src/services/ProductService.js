@@ -34,7 +34,7 @@ class ProductService {
       });
 
       const prevProducts = await this.getProducts('PRODUCTS');
-      const result = await this.localStorageService.set('PRODUCTS', prevProducts.success ? prevProducts.data.concat(productList) : productList);
+      const result = await this.localStorageService.set('PRODUCTS', prevProducts.success ? [...prevProducts.data, ...productList] : productList);
 
       if (!result) throw new Error('Saving products have failed!');
 
@@ -84,7 +84,10 @@ class ProductService {
       const pageStart = (size * page) - size;
       const pageEnd = size * page;
 
-      return products.data.slice(pageStart, pageEnd);
+      return {
+        success: true,
+        data: products.data.slice(pageStart, pageEnd)
+      };
 
     } catch (error) {
       return {

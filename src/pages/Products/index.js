@@ -1,27 +1,56 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { ProductList } from '../../components';
+import React, { useState, useEffect, memo } from 'react';
+import { ProductList, Loading } from '../../components';
 
 import ProductService from '../../services/ProductService';
-import { Store } from '../../store';
 
 const productService = new ProductService();
 
-function Products() {
+const Products = () => {
   const [products, setProducts] = useState([]);
-  const { state } = useContext(Store);
+  const [page, setPage] = useState(1);
+  const perPage = 8;
+
+  const [loading, setLoading] = useState(false);
 
   const getProducts = async () => {
-    const productsResponse = await productService.getProducts();
-    setProducts(productsResponse.data);
+    setLoading(true);
+    const productsResponse = await productService.getProductsPerPage(perPage, page);
+
+    if (productsResponse.success) {
+      // This timeout is only to show loading animation because localstorage too fast to get data from
+      setTimeout(() => {
+        setProducts(prev => [...prev, ...productsResponse.data]);
+        setLoading(false);
+      }, 1500);
+    };
+  };
+
+  const handleScroll = () => {
+    const windowInnerHeight = window.innerHeight;
+    const scrollFromTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+
+    if (windowInnerHeight + scrollFromTop + 1 >= scrollHeight) {
+      setPage(prev => prev + 1);
+    }
   };
 
   useEffect(() => {
     getProducts();
-  }, [state.productList]);
+  }, [page]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <ProductList products={products} />
+    <>
+      <ProductList products={products} />
+      {loading && <Loading />}
+    </>
   );
-}
+};
 
-export default Products;
+export default memo(Products);

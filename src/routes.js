@@ -6,7 +6,7 @@ import AddProduct from './pages/Products/Add';
 export const AppRoutes = () => {
 
   return (
-    <Routes >
+    <Routes>
       <Route path="/" element={<Products />} />
       <Route path="/products" element={<Products />} />
       <Route path="/products/add" element={<AddProduct />} />
