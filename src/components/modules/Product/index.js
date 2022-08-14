@@ -1,4 +1,4 @@
-import React, { memo, useState, useContext, useCallback } from 'react';
+import React, { memo, useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTrash,
@@ -26,17 +26,17 @@ const Product = (props) => {
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
   const { dispatch } = useContext(Store);
 
-  const handleRemoveProduct = useCallback(async () => {
+  const handleRemoveProduct = async () => {
     const removeProductResponse = await productService.removeProduct(product.id);
 
     if (removeProductResponse.success) {
       removeProduct(product.id, dispatch);
     }
-  }, [product]);
+  };
 
-  const handleCollapse = useCallback(() => {
+  const handleCollapse = () => {
     setIsCollapsed(!isCollapsed);
-  }, [product]);
+  };
 
   return (
     <div className={`${styles.product} mb-15`}>
