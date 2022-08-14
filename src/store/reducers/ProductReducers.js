@@ -14,7 +14,6 @@ export const reducer = (state, action) => {
     case 'SAVE_PRODUCTS':
       return saveProducts(state, action.products);
     case 'REMOVE_PRODUCT':
-      console.log('REMOVE_PRODUCT');
       return removeProduct(state, action.productId);
     default:
       return state;

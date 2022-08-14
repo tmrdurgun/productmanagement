@@ -26,7 +26,6 @@ describe('PRODUCT SERVICE', () => {
 
   test('getProductsPerPage should work', async () => {
     const productsPerPage = await productService.getProductsPerPage(8, 2);
-    console.log('productsPerPage: ', productsPerPage);
 
     expect(productsPerPage).toBeDefined();
   });
