@@ -24,7 +24,6 @@ export const ProductForm = () => {
   const [newProduct, setNewProduct] = useState({
     name: '',
     barcode: '',
-    licenceCode: '',
     desc: '',
     type: ProductTypes.standart,
   });
@@ -33,7 +32,10 @@ export const ProductForm = () => {
 
   const handleAddProduct = (event) => {
     event.preventDefault();
-    setProducts([...products, newProduct]);
+
+    if (!validateForm([newProduct], ['name', 'barcode'])) return false;
+
+    setProducts([...products, { ...newProduct, licenceCode: newProduct.type === ProductTypes.onlineLicence ? '' : undefined }]);
   };
 
   const handleChangeProductDetails = (index, field, val) => {
@@ -55,7 +57,6 @@ export const ProductForm = () => {
     setNewProduct({
       name: '',
       barcode: '',
-      licence: '',
       desc: '',
       type: ProductTypes.standart
     });
@@ -66,6 +67,8 @@ export const ProductForm = () => {
   const handleSaveProduct = async (event) => {
     event.preventDefault();
 
+    if (!validateForm(products, ['desc', 'licenceCode'])) return false;
+
     const saveProductsResponse = await productService.saveProducts(products);
 
     if (saveProductsResponse.success) {
@@ -74,6 +77,26 @@ export const ProductForm = () => {
       resetForm();
     }
 
+  };
+
+  const validateForm = (formObjects, fields) => {
+    const inValidFields = [];
+
+    for (const formObject of formObjects) {
+      for (const key in formObject) {
+        for (const field of fields) {
+          if (key === field && formObject[field] === '') inValidFields.push(key);
+        }
+      }
+    }
+
+    if (inValidFields.length) {
+      alert('Please fill required fields!');
+
+      return false;
+    }
+
+    return true;
   };
 
   return (
@@ -113,7 +136,7 @@ export const ProductForm = () => {
             products.map((productItem, i) => (
               <li key={`productItem-${i + 1}`} className="mb-15">
                 <span>{`${productItem.name} - ${productItem.barcode}`}</span>
-                <a href="javascript:void(0)" onClick={() => handleRemoveProduct(i)}><FontAwesomeIcon icon={faTrash} size="sm" /></a>
+                <a href="#" onClick={() => handleRemoveProduct(i)}><FontAwesomeIcon icon={faTrash} size="sm" /></a>
               </li>
             ))
           }
