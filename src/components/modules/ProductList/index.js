@@ -1,37 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 
-import { Product } from '../../../components';
+import { Product, Loading } from '../../../components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './style.module.scss';
 
-import ProductService from '../../../services/ProductService';
-import { Store } from '../../../store';
 
-const productService = new ProductService();
 
-export const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const { state } = useContext(Store);
-
-  const getProducts = async () => {
-    const productsResponse = await productService.getProducts();
-    setProducts(productsResponse.data);
-  };
-
-  useEffect(() => {
-    getProducts();
-  }, [state.productList]);
-
-  const productList = products?.map((product) => (
-    <Product
-      key={product.id}
-      product={product}
-      collapsed
-    />
-  ));
+export const ProductList = ({ products }) => {
 
   /* 
     The factory pattern allows to factor out the process of object creation. This can have multiple purpose:
@@ -41,7 +19,18 @@ export const ProductList = () => {
   */
   const renderFactory = () => {
     if (products.length > 0) {
-      return <div className={styles.productList}>{productList}</div>;
+      return (
+        <div className={styles.productList}>
+          {products.map((product) => (
+            <Product
+              key={product.id}
+              product={product}
+              collapsed
+            />
+          ))}
+          <Loading />
+        </div>
+      );
     }
 
     return <h3 className="text-center text-bold">No Products To Display <FontAwesomeIcon icon={faFrown} size="lg" /></h3>;

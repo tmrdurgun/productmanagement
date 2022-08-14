@@ -1,12 +1,17 @@
+.spinnerContainer{
+  display: flex;
+  justify-content: center;
+}
+
 .spinner {
-    color: official;
     display: inline-block;
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
+    margin: auto;
   }
   .spinner div {
-    transform-origin: 40px 40px;
+    transform-origin: 33px 33px;
     animation: spinner 1.2s linear infinite;
   }
   .spinner div:after {
@@ -15,8 +20,8 @@
     position: absolute;
     top: 3px;
     left: 37px;
-    width: 6px;
-    height: 18px;
+    width: 4px;
+    height: 13px;
     border-radius: 20%;
     background: #222;
   }
