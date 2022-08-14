@@ -48,7 +48,7 @@ const Products = () => {
   return (
     <>
       <ProductList products={products} />
-      {loading && <Loading />}
+      {(loading && products.length > 0) && <Loading />}
     </>
   );
 };
