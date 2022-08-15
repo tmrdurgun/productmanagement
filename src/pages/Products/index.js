@@ -16,15 +16,11 @@ const Products = () => {
   const getProducts = async () => {
     setLoading(true);
 
-    const productsResponse = await productService.getProductsPerPage(perPage, page);
-
+    // const productsResponse = await productService.getProductsPerPage(perPage, page);
+    const productsResponse = await productService.getProducts();
     if (productsResponse.success) {
-      // This timeout is only to show loading animation because localstorage too fast to get data from
-      setTimeout(() => {
-        // to retrieve updated page after delete action, filter previous list with updated context state
-        setProducts(prev => [...prev.filter(prevItem => state.productList.find(item => item.id === prevItem.id)), ...productsResponse.data]);
-        setLoading(false);
-      }, 1500);
+      setProducts(productsResponse.data);
+      setLoading(false);
     };
   };
 
@@ -38,9 +34,13 @@ const Products = () => {
     }
   };
 
+  /* useEffect(() => {
+    getProducts();
+  }, [page, state.productList]); */
+
   useEffect(() => {
     getProducts();
-  }, [page, state.productList]);
+  }, [state.productList]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
