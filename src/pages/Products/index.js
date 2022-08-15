@@ -6,6 +6,9 @@ import { Store } from '../../store';
 
 const productService = new ProductService();
 
+/*
+  Lazy load & infinit scroll works fine with enough items as page size starter but runs into data sync issues after remove action so disabled until fixed
+*/
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
